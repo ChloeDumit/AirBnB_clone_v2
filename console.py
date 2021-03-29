@@ -130,23 +130,9 @@ class HBNBCommand(cmd.Cmd):
                 attr = my_args_list[i].split("=")
                 key = attr[0]
                 value = attr[1]
-            # if value start with ""
-            # escape all " with \
-            # all _ must be spaces
+                #if it starts with "
                 if value[0] == '"':
                     value = value[1:-1]
-                    # hacer el loop que habia dicho hoy
-                    # value = value.replace('"', '')
-                    # str_list = []
-                    # new_str = ""
-                    # for char in value:
-                    #    str_list.append(char)
-                    # for char in range(len(str_list)):
-                    #    if str_list[char] == '"':
-                    #        str_list.insert(char, '\\')
-                    # for char in str_list:
-                    #    new_str += char
-                    # value = new_str
                     value = value.replace('"', '\"')
                     value = value.replace('_', ' ')
                 elif '.' in value:
