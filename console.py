@@ -137,8 +137,8 @@ class HBNBCommand(cmd.Cmd):
                     value = value[1:-1]
                     # hacer el loop que habia dicho hoy
                     # value = value.replace('"', '')
-                    str_list = []
-                    new_str = ""
+                    # str_list = []
+                    # new_str = ""
                     # for char in value:
                     #    str_list.append(char)
                     # for char in range(len(str_list)):
@@ -147,13 +147,14 @@ class HBNBCommand(cmd.Cmd):
                     # for char in str_list:
                     #    new_str += char
                     # value = new_str
-                    # value = value.replace('"', '\\')
+                    value = value.replace('"', '\"')
                     value = value.replace('_', ' ')
                 elif '.' in value:
                     value = float(value)
                 else:
                     value = int(value)
                 setattr(new_instance, key, value)
+        print(new_instance.id)
         storage.save()
 
     def help_create(self):
