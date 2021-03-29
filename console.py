@@ -147,7 +147,7 @@ class HBNBCommand(cmd.Cmd):
                     # for char in str_list:
                     #    new_str += char
                     # value = new_str
-                    # value = value.replace('"', '\"')
+                    # value = value.replace('"', '\\')
                     value = value.replace('_', ' ')
                 elif '.' in value:
                     value = float(value)
