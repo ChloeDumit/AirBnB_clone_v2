@@ -1,13 +1,17 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
+from os import getenv
+from models.city import City
+from sqlalchemy.orm import relationship
 
 
 class State(BaseModel, Base):
-    """ State class """    
+    """ State class """
     if storage_i == "db":
         __tablename__ = 'states'
         name = Column(String(128), nullable=False)
+        cities = relationship("City", backref="state")
     else:
         name = ""

@@ -123,14 +123,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         else:
-            # crear objeto nuevo
+            # create new object
             new_instance = HBNBCommand.classes[my_args_list[0]]()
-            # loop para setattr
+            # loop for setattr
             for i in range(1, len(my_args_list)):
                 attr = my_args_list[i].split("=")
                 key = attr[0]
                 value = attr[1]
-                #if it starts with "
+                # if it starts with "
                 if value[0] == '"':
                     value = value[1:-1]
                     value = value.replace('"', '\"')
