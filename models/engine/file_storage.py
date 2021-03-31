@@ -13,11 +13,11 @@ class FileStorage:
         if cls is not None:
             obj_list = {}
             for obj, value in FileStorage.__objects.items():
-                if value.__class__ == cls:
+                if type(value).__name__ == cls.__name__:
                     obj_list[obj] = value
-                return obj_list
-            else:
-                return FileStorage.__objects
+            return obj_list
+        else:
+            return FileStorage.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -52,7 +52,7 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
 
@@ -61,8 +61,8 @@ class FileStorage:
         if obj is None:
             return
 
-        key = "{}.{}".format(type(obj).__name__, obj.id)
+        k = "{}.{}".format(type(obj).__name__, obj.id)
 
-        if key in self.__objects:
+        if k in self.__objects:
             del self.__objects[k]
             self.save()
