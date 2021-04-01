@@ -10,85 +10,33 @@ from models.base_model import BaseModel
 class TestPlace(unittest.TestCase):
     """this will test the place class"""
 
-    def __init__(self, *args, **kwargs):
-        """ """
-        super().__init__(*args, **kwargs)
-        self.name = "Place"
-        self.value = Place
+    @classmethod
+    def setUpClass(cls):
+        """set up for test"""
+        cls.place = Place()
+        cls.place.city_id = "1234-abcd"
+        cls.place.user_id = "4321-dcba"
+        cls.place.name = "My_house"
+        cls.place.description = "no_description_yet"
+        cls.place.number_rooms = 4
+        cls.place.number_bathrooms = 1
+        cls.place.max_guest = 3
+        cls.place.price_by_night = 100
+        cls.place.latitude = 120.12
+        cls.place.longitude = 101.4
 
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
-                     "This test only work in Filestorage")
-    def test_city_id(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.city_id), str)
-
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
-                     "This test only work in Filestorage")
-    def test_user_id(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.user_id), str)
-
-    # @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
-    # "This test only work in Filestorage")
-    # def test_name(self):
-    # """ """
-    # new = self.value()
-    # self.assertEqual(type(new.name), str)
-
-    # @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
-    # "This test only work in Filestorage")
-    # def test_description(self):
-    # """ """
-    # new = self.value()
-    # self.assertEqual(type(new.description), str)
-
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
-                     "This test only work in Filestorage")
-    def test_number_rooms(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.number_rooms), int)
-
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
-                     "This test only work in Filestorage")
-    def test_number_bathrooms(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.number_bathrooms), int)
-
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
-                     "This test only work in Filestorage")
-    def test_max_guest(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.max_guest), int)
-
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
-                     "This test only work in Filestorage")
-    def test_price_by_night(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.price_by_night), int)
-
-    # @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
-    # "This test only work in Filestorage")
-    # def test_latitude(self):
-    # """ """
-    # new = self.value()
-    # self.assertEqual(type(new.latitude), float)
-
-    # @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
-    # "This test only work in Filestorage")
-    # def test_longitude(self):
-    # """ """
-    # new = self.value()
-    # self.assertEqual(type(new.latitude), float)
-
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
-                     "This test only work in Filestorage")
-    def test_amenity_ids(self):
-        """ """
-        new = self.value()
-        self.assertEqual(type(new.amenity_ids), list)
+    def test_attributes_Place(self):
+        """tests if amenity have attributes"""
+        self.assertTrue('id' in self.place.__dict__)
+        self.assertTrue('created_at' in self.place.__dict__)
+        self.assertTrue('updated_at' in self.place.__dict__)
+        self.assertTrue('city_id' in self.place.__dict__)
+        self.assertTrue('user_id' in self.place.__dict__)
+        self.assertTrue('name' in self.place.__dict__)
+        self.assertTrue('description' in self.place.__dict__)
+        self.assertTrue('number_rooms' in self.place.__dict__)
+        self.assertTrue('number_bathrooms' in self.place.__dict__)
+        self.assertTrue('max_guest' in self.place.__dict__)
+        self.assertTrue('price_by_night' in self.place.__dict__)
+        self.assertTrue('latitude' in self.place.__dict__)
+        self.assertTrue('longitude' in self.place.__dict__)
