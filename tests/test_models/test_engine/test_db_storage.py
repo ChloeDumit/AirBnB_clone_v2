@@ -1,0 +1,30 @@
+#!/usr/bin/python
+"""Unittests for DBStorage class"""
+import unittest
+import os
+from os import getenv
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+from models.engine.db_storage import DBStorage
+from models.engine.file_storage import FileStorage
+
+
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
+                 "This test only work in DBStorage")
+class TestDBStorage(unittest.TestCase):
+    """this will test the DBStorage"""
+    def test_new(self):
+        """tests if new obj is created"""
+        storage = FileStorage()
+        obj = storage.all()
+        state_example = State()
+        state_example.id = 123456
+        state_example.name = "California"
+        storage.new(state_example)
+        key = state_example.__class__.__name__ + "." + str(state_example.id)
+        self.assertIsNotNone(obj[key])
