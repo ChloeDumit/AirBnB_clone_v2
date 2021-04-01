@@ -24,6 +24,8 @@ class TestPlace(unittest.TestCase):
         cls.place.price_by_night = 100
         cls.place.latitude = 120.12
         cls.place.longitude = 101.4
+        cls.place.review = "cool"
+        cls.place.amenity_ids = ["1324-efgh"]
 
     def test_attributes_Place(self):
         """tests if amenity have attributes"""
@@ -40,3 +42,11 @@ class TestPlace(unittest.TestCase):
         self.assertTrue('price_by_night' in self.place.__dict__)
         self.assertTrue('latitude' in self.place.__dict__)
         self.assertTrue('longitude' in self.place.__dict__)
+        self.assertTrue('amenity_ids' in self.place.__dict__)
+
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
+                     "This test only work in Filestorage")
+    def test_save_Place(self):
+        """test if save works"""
+        self.place.save()
+        self.assertNotEqual(self.place.created_at, self.place.updated_at)
