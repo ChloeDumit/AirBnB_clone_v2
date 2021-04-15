@@ -1,34 +1,37 @@
 #!/usr/bin/python3
-""" Program that compress a dir with tar before sending """
+""" Program that distributes an archive to your web servers,
+cusing the function do_deploy """
 from datetime import datetime
 from fabric.api import *
 from os import path
 
-env.hosts = ['35.231.99.203', '104.196.174.128']
+env.hosts = ['35.243.214.144', '34.233.133.27']
 
 
 def do_pack():
     """ Generates a .tgz archive from the contents of the web_static
     folder of your AirBnB Clone repo """
-    today = datetime.now().strftime('%Y%m%d%H%M%S')
+    date_str = datetime.now().strftime('%Y%m%d%H%M%S')
     local("mkdir -p versions/")
     try:
         local("tar -cvzf versions/web_static_{}.tgz web_static"
-              .format(today))
-        return "versions/web_static_{}.tgz".format(today)
+              .format(date_str))
+        return "versions/web_static_{}.tgz".format(date_str)
     except Exception:
         return None
 
 
 def do_deploy(archive_path):
+    """ Distributes an archive to the web servers """
     if not path.exists(archive_path):
         return False
-    
+    # split the path and get the second element in the list
     file_path = archive_path.split("/")[1]
     serv_folder = "/data/web_static/releases/" + file_path
+
     try:
         put(archive_path, "/tmp/")
-        run("sudo mkdir -p" + serv_folder)
+        run("sudo mkdir -p " + serv_folder)
         run("sudo tar -xzf /tmp/" + file_path + " -C " + serv_folder + "/")
         run("sudo rm /tmp/" + file_path)
         run("sudo mv " + serv_folder + "/web_static/* " + serv_folder)
