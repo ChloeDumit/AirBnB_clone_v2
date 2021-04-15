@@ -1,12 +1,25 @@
 #!/usr/bin/python3
-""" Program that distributes an archive to your web servers,
-cusing the function do_deploy """
-from datetime import datetime
+""" comentario """
 from fabric.api import *
+from datetime import datetime
 import os
 
 
-env.hosts = ['35.231.99.203','104.196.174.128']
+env.hosts = ['35.231.99.203', '104.196.174.128']
+
+
+def do_pack():
+    """ function comment """
+    local("mkdir -p versions/")
+    now = datetime.now()
+    date_time = now.strftime("%Y%m%d%H%M%S")
+    name = "versions/web_static_" + date_time
+    try:
+        local("tar -cvzf " + name + ".tgz web_static")
+        return "{}.tgz".format(name)
+    except Exception:
+        return None
+
 
 def do_deploy(archive_path):
     """Fabric script distributes archive to web servers """
@@ -32,3 +45,11 @@ def do_deploy(archive_path):
             return False
     else:
         return False
+
+
+def deploy():
+    """ Function comment """
+    file_path = do_pack()
+    if file_path is None:
+        return False
+    return do_deploy(file_path)
