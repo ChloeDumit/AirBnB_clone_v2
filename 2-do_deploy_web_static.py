@@ -6,7 +6,8 @@ from fabric.api import *
 import os
 
 
-env.hosts = ['35.231.99.203','104.196.174.128']
+env.hosts = ['35.231.99.203', '104.196.174.128']
+
 
 def do_deploy(archive_path):
     """Fabric script distributes archive to web servers """
