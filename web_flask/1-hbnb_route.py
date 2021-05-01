@@ -12,11 +12,13 @@ def hello():
     """ Display a custom String on main Route """
     return "Hello HBNB!"
 
-    
+
 @app.route('/hbnb', strict_slashes=False)
-def hbnb():
-    """ Display a custom String on main Route """
-    return "HBNB"
+def second_task():
+    """ This function returns a string
+    """
+    return 'HBNB'
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
