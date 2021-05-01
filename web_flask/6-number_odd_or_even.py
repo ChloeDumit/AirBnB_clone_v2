@@ -50,10 +50,16 @@ def sixth_task(n):
     return render_template('5-number.html', n=n)
 
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
-def number_odd_even(n):
-    """  Function that receives a number argument, render a template and
-    a conditional """
-    return render_template('6-number_odd_or_even.html', number=n)
+def odd_even(n):
+    """ This function returns a rendered web
+    if n is an int.
+    Tells if n is odd or even
+    """
+    if n % 2 == 0:
+        type = "even"
+    else:
+        type = "odd"
+    return render_template('6-number_odd_or_even.html', n=n, type=type)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
