@@ -35,5 +35,13 @@ def fourth_task(text):
     """
     return 'Python %s' % text.replace('_', ' ')
 
+@app.route('/number/<int:n>', strict_slashes=False)
+def fifth_task(n):
+    """ This function returns a string.
+    It also takes a variable
+    """
+    return '%i is a number' % n
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
