@@ -1,16 +1,16 @@
 #!/usr/bin/python3
-""" Program that starts a Flask web application
-Your web application must be listening on 0.0.0.0, port 5000
-In Route /: display “Hello HBNB!”
-You must use the option strict_slashes=False in your route definition"""
+""" This module contains a Flask instance
+"""
+
 from flask import Flask
 app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def hello():
-    """ Display a custom String on main Route """
-    return "Hello HBNB!"
+def first_task():
+    """ This function returns a string
+    """
+    return 'Hello HBNB!'
 
 
 @app.route('/hbnb', strict_slashes=False)

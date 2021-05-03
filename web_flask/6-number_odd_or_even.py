@@ -1,16 +1,16 @@
 #!/usr/bin/python3
-""" Program that starts a Flask web application
-Your web application must be listening on 0.0.0.0, port 5000
-In Route /: display “Hello HBNB!”
-You must use the option strict_slashes=False in your route definition"""
-from flask import Flask
+""" This module contains a Flask instance
+"""
+
+from flask import Flask, render_template
 app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def hello():
-    """ Display a custom String on main Route """
-    return "Hello HBNB!"
+def first_task():
+    """ This function returns a string
+    """
+    return 'Hello HBNB!'
 
 
 @app.route('/hbnb', strict_slashes=False)
@@ -27,6 +27,7 @@ def third_task(text):
     """
     return 'C %s' % text.replace('_', ' ')
 
+
 @app.route('/python/', defaults={"text": "is cool"})
 @app.route('/python/<text>', strict_slashes=False)
 def fourth_task(text):
@@ -35,6 +36,7 @@ def fourth_task(text):
     """
     return 'Python %s' % text.replace('_', ' ')
 
+
 @app.route('/number/<int:n>', strict_slashes=False)
 def fifth_task(n):
     """ This function returns a string.
@@ -42,12 +44,14 @@ def fifth_task(n):
     """
     return '%i is a number' % n
 
+
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def sixth_task(n):
     """ This function returns a rendered web
     if n is an int.
     """
     return render_template('5-number.html', n=n)
+
 
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def odd_even(n):
@@ -60,6 +64,7 @@ def odd_even(n):
     else:
         type = "odd"
     return render_template('6-number_odd_or_even.html', n=n, type=type)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
